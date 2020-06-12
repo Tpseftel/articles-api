@@ -22,7 +22,8 @@
     "helmet": "^3.23.0",
     "joi-objectid": "^3.0.1",
     "mongodb": "^3.5.9",
-    "mongoose": "^5.9.18"
+    "mongoose": "^5.9.18",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "jest": "^26.0.1"
