@@ -16,9 +16,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "helmet": "^3.23.0",
+    "joi-objectid": "^3.0.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.18"
   },
