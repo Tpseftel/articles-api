@@ -4,6 +4,7 @@ const app = express();
 
 
 app.use(helmet());
+require('./startup/db')();
 require('./startup/routes')(app);
 
 

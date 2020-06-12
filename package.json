@@ -16,8 +16,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "debug": "^4.1.1",
     "express": "^4.17.1",
-    "helmet": "^3.23.0"
+    "helmet": "^3.23.0",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.18"
   },
   "devDependencies": {
     "jest": "^26.0.1"
