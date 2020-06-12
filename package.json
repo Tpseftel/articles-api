@@ -16,7 +16,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "helmet": "^3.23.0"
   },
   "devDependencies": {
     "jest": "^26.0.1"
