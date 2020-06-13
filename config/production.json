@@ -1,0 +1,13 @@
+{   
+    "app": {
+        "name": "Article API - Production",
+        "jwtPrivateKey": "",
+        "db_config": {
+            "host": "mongodb+srv" ,
+            "db_name": "blogDB",
+            "username": "",
+            "password": "",
+            "options": "retryWrites=true&w=majority"
+        }
+    }
+}

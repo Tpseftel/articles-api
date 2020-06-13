@@ -1,0 +1,9 @@
+{   
+    "app": {
+        "jwtPrivateKey": "FI_JWT_KEY",
+        "db_config": {
+            "username": "FI_MONGO_USER",
+            "password": "FI_MONGO_PASS"
+        }
+    }
+}

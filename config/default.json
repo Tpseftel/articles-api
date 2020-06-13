@@ -1,0 +1,14 @@
+{   
+    "app":{
+        "name": "Article API - Development",
+        "jwtPrivateKey": "",
+        "db_config": {
+            "db_name": "blogDB",
+            "host": "localhost" ,
+            "port": "27017",
+            "username": "",
+            "password": "",
+            "options": ""
+        }
+    }
+}

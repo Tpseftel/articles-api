@@ -6,7 +6,6 @@ beforeAll(async () => {
     require('../../../startup/db')();
 });
 
-
 afterAll(() => {
     mongoose.connection.close();
 });

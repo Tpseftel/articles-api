@@ -1,3 +1,4 @@
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const Joi = require('@hapi/joi');
 const  mongooose = require('mongoose');
@@ -33,9 +34,7 @@ const author_schema = new mongooose.Schema({
 });
 
 author_schema.methods.generateAuthToken = function () {
-    // FIXME: Add private key from config
-    // const private_key = config.get('jwtPrivateKey');
-    const token = jwt.sign({ name: this.name }, 'private_key', { expiresIn: '1h' });
+    const token = jwt.sign({ name: this.name },config.get('app.jwtPrivateKey'), { expiresIn: '1h' });
     return token;
 };
 
