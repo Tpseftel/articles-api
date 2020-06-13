@@ -2,7 +2,6 @@ const debug = require('debug')('app: tests/articles.test.js');
 const mongoose = require('mongoose');
 const request = require('supertest');
 const { Article } = require('../../../models/article');
-const { expectCt } = require('helmet');
 const moment  = require('moment');
 
 let server;
@@ -80,7 +79,7 @@ describe('/api/articles', () => {
 
                 expect(response.status).toBe(404);
         });
-        it.only('should return 400 if the given new value is invalid', async () => {
+        it('should return 400 if the given new value is invalid', async () => {
             let saved_article  = new Article(article);
             saved_article = await saved_article.save();
             const title = 'a';
@@ -91,8 +90,23 @@ describe('/api/articles', () => {
 
             expect(response.status).toBe(400);
         });
-        it.todo('should  return  404 status if the given id is invalid');
-        it.todo('should  update the given genre with the new value');
+
+        it('should  update the article  with the new value', async () => {
+            let saved_article  = new Article(article);
+            saved_article = await saved_article.save();
+
+            const updated_title = 'Updated Title';
+            const response =  await request(server)   
+                .put(`/api/articles/${saved_article._id}`)
+                .send({ 
+                    title: updated_title 
+                });
+
+            const db_article = await Article.findById(saved_article._id);
+            debug(`db_article: ${db_article}`);
+
+            expect(db_article.title).toMatch(updated_title);
+        });
     });
 
 
