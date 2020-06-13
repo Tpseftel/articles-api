@@ -7,7 +7,8 @@ const router = express.Router();
 
 
 router.get('/me', auth, async (req, res) => {
-    const author = await Author.findById(req.user._id).select('-password');
+    console.log(req.author._id);
+    const author = await Author.findById(req.author._id).select('-password -__v');
     res.send(author);
 });
 
