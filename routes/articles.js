@@ -43,13 +43,12 @@ router.put('/:id', async (req, res) => {
     const {error} = validateArticle(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    // Update article
-     article.title = req.body.title; 
-     article.summary = req.body.summary; 
-     article.published_status = req.body.published_status; 
-     article.published_date = req.body.published_date; 
+    const updated_article = await Article.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new:true }
+    );
 
-    const updated_article = await  article.save();
     res.send(updated_article);
 });
 
