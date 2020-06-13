@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 mongoose.set('debug', true);
 
 
-let topology = process.env.NODE_ENV == 'test' ? false : true;
+const topology = process.env.NODE_ENV == 'test' ? false : true;
+const db_name = process.env.NODE_ENV == 'test' ? 'blogDB_test' :'blogDB';
 
 module.exports = function () {
-        mongoose.connect('mongodb://localhost:27017/blogDB',
+        mongoose.connect('mongodb://localhost:27017/' + db_name,
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: topology 
