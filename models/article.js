@@ -1,6 +1,7 @@
 const  mongooose = require('mongoose');
 const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
+require('./category'); 
 
 
 const article_shema = new mongooose.Schema({
@@ -18,11 +19,15 @@ const article_shema = new mongooose.Schema({
         type: Boolean,
         default: false
     },
-    published_date:{
+    published_date: {
         type: Date
-    }
+    },
+    categories: [{
+        type: mongooose.Schema.Types.ObjectId,
+        ref: 'Category'
+    }]
+
     // TODO: Author
-    // TODO: category see vidly 
 });
 
 

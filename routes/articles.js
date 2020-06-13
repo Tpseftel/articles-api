@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 // Get all articles
 router.get('/', async (req, res) => {
-    const articles = await Article.find({}).sort('title');
+    const articles = await Article.find({}).sort('title').populate('categories');
     res.send(articles);
 });
 
