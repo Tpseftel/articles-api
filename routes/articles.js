@@ -1,6 +1,6 @@
+const auth = require ('../middleware/auth');
 const { Author } = require('../models/author');
 const { Category } = require('../models/category');
-const debug = require('debug')('app: articles router');
 const express = require('express');
 const { Article, validateArticle } = require('../models/article');
 const router = express.Router();
@@ -15,14 +15,10 @@ router.get('/', async (req, res) => {
 });
 
 //  Create new article
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     // Check if user input is valid
     const { error } = validateArticle(req.body);
     if(error) return res.status(400).send(error.details[0].message);
-
-    // Check if there is the given author
-    const author = await Author.findById(req.body.author);
-    if(!author) return res.status(404).send('Author not found');
 
     // Check if there is the given category
     const category = await Category.findById(req.body.category);
@@ -33,7 +29,7 @@ router.post('/', async (req, res) => {
         summary: req.body.summary,
         published_status: req.body.published_status,
         published_date: req.body.published_date,
-        author: req.body.author,
+        author: req.author._id,
         category: req.body.category
     });
 
@@ -42,7 +38,7 @@ router.post('/', async (req, res) => {
 });
 
 // Update article
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth , async (req, res) => {
     // Check if article id format is valid
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return res.status(400).send('Invalid article ID format.');
