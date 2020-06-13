@@ -23,10 +23,10 @@ const article_shema = new mongooose.Schema({
     published_date: {
         type: Date
     },
-    categories: [{
+    category: {
         type: mongooose.Schema.Types.ObjectId,
         ref: 'Category'
-    }],
+    },
     author: {
         type: mongooose.Schema.Types.ObjectId,
         ref: 'Author'
@@ -45,8 +45,8 @@ function validateArticle(article) {
         summary: Joi.string().min(3),
         published_status: Joi.boolean(),
         published_date: Joi.date(),
-        author: Joi.array().items(Joi.objectId()),
-        category: Joi.array().items(Joi.objectId()),
+        author: Joi.objectId(),
+        category: Joi.objectId(),
     }); 
     return schema.validate(article);
 }
