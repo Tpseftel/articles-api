@@ -12,6 +12,9 @@ const article_shema = new mongooose.Schema({
         maxlength: 250,
         trim: true
     },
+    content: {
+        type: String
+    },
     summary: {
         type: String,
         minlength: 5
@@ -31,8 +34,6 @@ const article_shema = new mongooose.Schema({
         type: mongooose.Schema.Types.ObjectId,
         ref: 'Author'
     }
-
-
     
 });
 
@@ -47,6 +48,7 @@ function validateArticle(article) {
         published_date: Joi.date(),
         author: Joi.objectId(),
         category: Joi.objectId(),
+        content: Joi.string()
     }); 
     return schema.validate(article);
 }
