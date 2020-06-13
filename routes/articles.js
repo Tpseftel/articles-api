@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 // Get all articles
 router.get('/', async (req, res) => {
     const articles = await Article.find({}).sort('title')
-        .populate('categories')
+        .populate('category')
         .populate('author');
     res.send(articles);
 });
