@@ -3,19 +3,21 @@ const mongoose = require('mongoose');
 const request = require('supertest');
 const { Article } = require('../../../models/article');
 const { expectCt } = require('helmet');
+const moment  = require('moment');
 
 let server;
 describe('/api/articles', () => {
+    debug(`App Enviroment: ${process.env.NODE_ENV}`);
+
     let article;
     beforeEach( () => {
         server = require('../../../index');     
 
         article = {
             title:'Amazing article 1',
-            summary: 'Amazing summary1',
+            summary: 'Amazing summary 1',
             published_status: true,
-            // FIXME: Use moment
-            published_date: Date.now(),
+            published_date: moment.now(),
         };
     });
 
@@ -56,4 +58,42 @@ describe('/api/articles', () => {
         });
         
     });
+
+
+    describe('PUT /:id', () => {
+        it('should return 400 if the given article Id has bad format', async () => {
+            const article_id = '1';
+            const response =  await request(server)   
+                    .put(`/api/articles/${article_id}`)
+                    .send({ title: 'Article updated' });
+
+                expect(response.status).toBe(400);
+        });
+        it('should return 404 id given article not found ', async () => {
+            let saved_article  = new Article(article);
+            await saved_article.save();
+
+            const article_id = mongoose.Types.ObjectId();
+            const response =  await request(server)   
+                .put(`/api/articles/${article_id}`)
+                .send({ title: 'Article updated' });
+
+                expect(response.status).toBe(404);
+        });
+        it.only('should return 400 if the given new value is invalid', async () => {
+            let saved_article  = new Article(article);
+            saved_article = await saved_article.save();
+            const title = 'a';
+
+            const response =  await request(server)   
+            .put(`/api/articles/${ saved_article._id }`)
+            .send({ title });
+
+            expect(response.status).toBe(400);
+        });
+        it.todo('should  return  404 status if the given id is invalid');
+        it.todo('should  update the given genre with the new value');
+    });
+
+
 });
