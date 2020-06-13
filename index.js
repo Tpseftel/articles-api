@@ -1,3 +1,5 @@
+require('express-async-errors');
+const handleErrors = require('./middleware/error');
 const debug = require('debug')('app: index.js');
 const helmet = require('helmet');
 const express = require('express');
@@ -19,6 +21,8 @@ if(app.get('env') === 'production') {
 
 require('./startup/db')();
 require('./startup/routes')(app);
+app.use(handleErrors);
+
 
 
 const port = process.env.PORT || 3000;
