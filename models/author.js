@@ -34,7 +34,10 @@ const author_schema = new mongooose.Schema({
 });
 
 author_schema.methods.generateAuthToken = function () {
-    const token = jwt.sign({ name: this.name },config.get('app.jwtPrivateKey'), { expiresIn: '1h' });
+    const token = jwt.sign(
+        { _id: this.id, name: this.name },
+        config.get('app.jwtPrivateKey'),
+        { expiresIn: '1h' });
     return token;
 };
 
