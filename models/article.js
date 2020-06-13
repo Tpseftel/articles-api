@@ -2,6 +2,7 @@ const  mongooose = require('mongoose');
 const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 require('./category'); 
+require('./author'); 
 
 
 const article_shema = new mongooose.Schema({
@@ -25,9 +26,14 @@ const article_shema = new mongooose.Schema({
     categories: [{
         type: mongooose.Schema.Types.ObjectId,
         ref: 'Category'
-    }]
+    }],
+    author: {
+        type: mongooose.Schema.Types.ObjectId,
+        ref: 'Author'
+    }
 
-    // TODO: Author
+
+    
 });
 
 
