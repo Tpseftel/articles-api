@@ -1,6 +1,7 @@
 require('express-async-errors');
 const handleErrors = require('./middleware/error');
 const debug = require('debug')('app: index.js');
+const cors = require('cors');
 const helmet = require('helmet');
 const express = require('express');
 const config = require('config');
@@ -24,6 +25,7 @@ if(app.get('env') === 'production') {
     }
 }
 
+app.use(cors())
 app.use(helmet());
 app.use(express.json());
 require('./startup/db')();
