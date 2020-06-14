@@ -45,6 +45,18 @@ describe('/api/articles', () => {
         
     });
 
+    describe('GET /:id', () => {
+        it('should return the requested article ', async () => {
+            execution();
+            const db_article = await Article.create(article);
+
+            const response = await request(server).get(`/api/articles/${db_article._id}`);
+
+            expect(response.status).toBe(200);
+        });
+        
+    });
+
     describe('POST /', () => {
         it('should return 400 status code if validation req.body fails', async () => {
             execution();
