@@ -1,7 +1,7 @@
 {
     "app": {
         "name": "Football Insights - Test",
-        "jwtPrivateKey": "",
+        "jwtPrivateKey": "test_key",
         "db_config": {
             "db_name": "blogDB_test"
         }

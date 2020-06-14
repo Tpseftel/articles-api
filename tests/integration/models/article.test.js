@@ -15,7 +15,7 @@ describe('Article Mongoose Model Schema', () => {
         await Article.deleteMany({});
     });
 
-    it('should save the player if the given article is valid', async() => {
+    it('should save the article if the given article is valid', async() => {
         let article = new Article({
             title:'Amazing First Article',
             summary: 'This is the amazing article',
