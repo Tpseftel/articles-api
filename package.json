@@ -1,5 +1,5 @@
 {
-  "name": "cocoon-assignment",
+  "name": "amazing-news",
   "version": "1.0.0",
   "description": "An amazing Restfull API About articles",
   "main": "index.js",
@@ -13,7 +13,7 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "author": "",
+  "author": "Theo Pse",
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
