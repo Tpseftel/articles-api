@@ -14,6 +14,17 @@ router.get('/', async (req, res) => {
     res.send(articles);
 });
 
+router.get('/:id', async (req, res) => {
+    if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return res.status(400).send('Invalid article ID format.');
+    }
+    
+    const article = await Article.findById(req.params.id);
+    if (!article) return res.status(404).send('The article with the given ID was not found.');
+
+    res.send(article);
+});
+
 //  Create new article
 router.post('/', auth, async (req, res) => {
     // Check if user input is valid
