@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 // Get all articles
 router.get('/', async (req, res) => {
     const articles = await Article.find({}).sort('title')
-        .populate('category')
-        .populate('author');
+        .populate('category','name')
+        .populate('author', 'name');
     res.send(articles);
 });
 
@@ -21,7 +21,7 @@ router.post('/', auth, async (req, res) => {
     if(error) return res.status(400).send(error.details[0].message);
 
     // Check if there is the given category
-    const category = await Category.findById(req.body.category);
+    let category = await Category.findById(req.body.category);
     if(!category) return res.status(404).send('Category not found');
 
     let article = new Article({
@@ -34,7 +34,9 @@ router.post('/', auth, async (req, res) => {
         category: req.body.category
     });
 
+    category.articles.push(article._id);
     let saved_article = await article.save();
+    await category.save();
     res.send(saved_article);
 });
 
